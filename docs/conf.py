@@ -11,10 +11,11 @@ from datetime import datetime
 def get_version():
     # Try to get version from installed package metadata
     try:
+        from importlib.metadata import PackageNotFoundError
         from importlib.metadata import version
 
         return version("django-constance")
-    except Exception:
+    except (ImportError, PackageNotFoundError):
         pass
 
     # Fall back to setuptools_scm generated version file
@@ -40,7 +41,7 @@ sys.path.insert(0, os.path.abspath(".."))
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "django-constance"
-project_copyright = datetime.now().year.__str__() + ", Jazzband"
+project_copyright = datetime.now().year.__str__() + ", Django Commons"
 
 # The full version, including alpha/beta/rc tags
 release = get_version()
@@ -77,13 +78,13 @@ htmlhelp_basename = "django-constancedoc"
 latex_elements = {}
 
 latex_documents = [
-    ("index", "django-constance.tex", "django-constance Documentation", "Jazzband", "manual"),
+    ("index", "django-constance.tex", "django-constance Documentation", "Django Commons", "manual"),
 ]
 
 # -- Options for manual page output ---------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-manual-page-output
 
-man_pages = [("index", "django-constance", "django-constance Documentation", ["Jazzband"], 1)]
+man_pages = [("index", "django-constance", "django-constance Documentation", ["Django Commons"], 1)]
 
 # -- Options for Texinfo output -------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-texinfo-output
@@ -93,7 +94,7 @@ texinfo_documents = [
         "index",
         "django-constance",
         "django-constance Documentation",
-        "Jazzband",
+        "Django Commons",
         "django-constance",
         "One line description of project.",
         "Miscellaneous",
